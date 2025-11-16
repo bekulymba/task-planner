@@ -58,32 +58,41 @@ body{
     align-items: center;
 }
 
-.controls{
+.controls {
     width: 100%;
     display: flex;
     justify-content: center;
-    gap:2rem;
-}
-.controls select:focus {
-    background-color: aquamarine;
-    color: #111;
-}
-
-.controls select:hover {
-    background-color: aquamarine;
-    color: #111;
+    gap: 2rem;
 }
 
 .controls select {
     padding: 0.5rem 1rem;
-    border-radius: 10px;
-    border: 1px solid #7fffd4;
-    font-size: .9rem;
-    background: transparent;
+    font-size: 0.9rem;
+    background: #222;
     color: aquamarine;
     cursor: pointer;
     outline: none;
-    transition: .2s;
+    border: 2px solid #222;
+    border-top-color: #7fffd4;
+    border-left-color: #7fffd4;
+    border-bottom-color: #144;
+    border-right-color: #144;
+    border-radius: 0;
+    transition: 0.1s;
+}
+
+.controls select:hover {
+    background: #222;
+    color: aquamarine;
+}
+
+.controls select:active {
+    border-top-color: #144;
+    border-left-color: #144;
+    border-bottom-color: #7fffd4;
+    border-right-color: #7fffd4;
+    background: #111;
+    color: aquamarine;
 }
 
 #task-list{
@@ -97,13 +106,52 @@ body{
 }
 .task{
     background: #222;
-    padding: 1rem;
     margin-bottom: 1rem;
+    gap: .5rem;
     display: flex;
-    gap: 1rem;
     flex-direction: column;
     width: 330px;
     min-height: 200px;
+    box-shadow: 3px 3px 0 #000;
+    border-radius: 4px;
+    border: 2px solid #000;
+    border-right-color: #555;
+    border-bottom-color: #555;
+}
+.task-header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    padding: 6px 10px;
+    border-bottom: 2px solid #000;
+    border-bottom-color: #555;
+}
+.task-window-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.task-window-buttons button {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    padding: 0;
+
+    background: #222;
+    color: aquamarine;
+
+    border-top-color: #144;
+    border-left-color: #144;
+    border-right-color: #7fffd4;
+    border-bottom-color: #7fffd4;
+
+    cursor: pointer;
+}
+
+.task-window-buttons button:hover {
+    background: aquamarine;
+    color: #111;
 }
 .task-title{
     display:flex;
@@ -115,6 +163,7 @@ body{
     display:flex;
     font-size:.9rem;
 }
+
 .task-description{
     display:flex;
     justify-content: center;
@@ -122,25 +171,50 @@ body{
     white-space: normal;
     overflow-wrap: break-word;
 }
-.task-actions{
+.task-data,
+.task-description {
+    padding: 0px 10px;
+    color: #aaa;
+}
+.task-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    padding: 12px;
     margin-top: auto;
-}
 
-.complete-btn, .edit-btn, .delete-btn{
-    padding: 0.5rem 1rem;
-    border: 1px solid #7fffd4;
-    cursor: pointer;
-    font-size: .8rem;
-    border-radius: 10px;
+    border-top: 2px solid #000;
+    border-top-color: #555;
+}
+.task-actions button {
+    padding: 6px 20px;
+
+    border: 2px solid #222; 
+    border-top-color: #7fffd4;   
+    border-left-color: #7fffd4;  
+    border-right-color: #144;   
+    border-bottom-color: #144;   
+
+    background: #1a1a1a;
     color: aquamarine;
-    background-color: transparent;
-
+    font-size: .9rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 0; 
 }
-.complete-btn:hover, .edit-btn:hover, .delete-btn:hover{
-    background-color: aquamarine;
+
+
+.task-actions button:hover {
+    background: aquamarine;
     color: #111;
 }
 
+.task-actions button:active {
+    border-top-color: #144;
+    border-left-color: #144;
+    border-right-color: #7fffd4;
+    border-bottom-color: #7fffd4;
+
+    background: #111;
+    color: aquamarine;
+}
