@@ -23,12 +23,8 @@
     </header>
     <main>
         <div class="main-container">
-            
-            <form id="task-form">
-                <input id="task-input" type="text" placeholder="New task..." required>
-                <button type="submit">Add</button>
-            </form>
 
+            <button class="new-task">New Task</button>
 
             <div class="controls">
                 <select id="filter">
@@ -49,7 +45,7 @@
         <ul id="task-list">
             <li class="task" data-id="1731043201111">
                 <div class="task-header">
-                    <span class="task-title">DOM</span>
+                    <span class="task-title">KEK</span>
 
                     <div class="task-window-buttons">
                         <button class="edit-btn">⋯</button>
@@ -62,101 +58,55 @@
 
                 <div class="task-actions">
                     <button class="complete-btn">Complete</button>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-            </li>
-            <li class="task" data-id="1731043201111">
-                <div class="task-header">
-                    <span class="task-title">DOM</span>
-
-                    <div class="task-window-buttons">
-                        <button class="edit-btn">⋯</button>
-                        <button class="delete-btn">✖</button>
-                    </div>
-                </div>
-
-                <div class="task-data">01.10.2004</div>
-                <span class="task-description">pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge </span>
-
-                <div class="task-actions">
-                    <button class="complete-btn">Complete</button>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-            </li>
-            <li class="task" data-id="1731043201111">
-                <div class="task-header">
-                    <span class="task-title">DOM</span>
-
-                    <div class="task-window-buttons">
-                        <button class="edit-btn">⋯</button>
-                        <button class="delete-btn">✖</button>
-                    </div>
-                </div>
-
-                <div class="task-data">01.10.2004</div>
-                <span class="task-description">pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge </span>
-
-                <div class="task-actions">
-                    <button class="complete-btn">Complete</button>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-            </li>
-            <li class="task" data-id="1731043201111">
-                <div class="task-header">
-                    <span class="task-title">DOM</span>
-
-                    <div class="task-window-buttons">
-                        <button class="edit-btn">⋯</button>
-                        <button class="delete-btn">✖</button>
-                    </div>
-                </div>
-
-                <div class="task-data">01.10.2004</div>
-                <span class="task-description">pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge </span>
-
-                <div class="task-actions">
-                    <button class="complete-btn">Complete</button>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-            </li>
-            <li class="task" data-id="1731043201111">
-                <div class="task-header">
-                    <span class="task-title">DOM</span>
-
-                    <div class="task-window-buttons">
-                        <button class="edit-btn">⋯</button>
-                        <button class="delete-btn">✖</button>
-                    </div>
-                </div>
-
-                <div class="task-data">01.10.2004</div>
-                <span class="task-description">pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge </span>
-
-                <div class="task-actions">
-                    <button class="complete-btn">Complete</button>
-                    <button class="cancel-btn">Cancel</button>
-                </div>
-            </li>
-            <li class="task" data-id="1731043201111">
-                <div class="task-header">
-                    <span class="task-title">DOM</span>
-
-                    <div class="task-window-buttons">
-                        <button class="edit-btn">⋯</button>
-                        <button class="delete-btn">✖</button>
-                    </div>
-                </div>
-
-                <div class="task-data">01.10.2004</div>
-                <span class="task-description">pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge pudge </span>
-
-                <div class="task-actions">
-                    <button class="complete-btn">Complete</button>
-                    <button class="cancel-btn">Cancel</button>
+                    <button class="fail-btn">Fail</button>
                 </div>
             </li>
         </ul>
         </div>
     </main>
+    <div class="modal" id="edit-modal">
+        <div class="modal-content">
+            <h2>Edit Task</h2>
+            <label>Title</label>
+            <input id="edit-task-title" type="text">
+            <label>Description</label>
+            <textarea id="edit-task-desc"></textarea>
+            <button id="edit-save">Save</button>
+            <button id="edit-cancel">Cancel</button>
+        </div>
+    </div>
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <h2>Delete Task?</h2>
+            <button id="delete-confirm">Yes</button>
+            <button id="delete-cancel">No</button>
+        </div>
+    </div>
+    <div class="modal" id="complete-modal">
+        <div class="modal-content">
+            <h2>Complete Task</h2>
+            <button id="complete-confirm">Yes</button>
+            <button id="complete-cancel">No</button>    
+        </div>
+    </div>
+    <div class="modal" id="new-task-modal">
+        <div class="modal-content">
+            <h2>New Task</h2>
+            <label>Title</label>
+            <input id="new-task-title" type="text">
+            <label>Description</label>
+            <textarea id="new-task-desc"></textarea>
+            <button id="new-task-save">Create</button>
+            <button id="new-task-cancel">Cancel</button>
+        </div>
+    </div>
+    <div class="modal" id="fail-modal">
+        <div class="modal-content">
+            <h2>Fail Task</h2>
+            <button id="fail-confirm">Yes</button>
+            <button id="fail-cancel">No</button>    
+        </div>
+    </div>
+    <script src="js/modals.js"></script>
 </body>
 </html>
