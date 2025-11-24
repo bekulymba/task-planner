@@ -1,3 +1,5 @@
+import { applyFiltersAndSort } from "./filter.js";
+
 function loadStateFromURL() {
     const params = new URLSearchParams(window.location.search);
 

@@ -1,3 +1,6 @@
+import { openModal,  closeModal } from "./modals.js";
+import { applyFiltersAndSort } from "./filter.js";
+
 // localstorage
 function loadTasks() {
     return JSON.parse(localStorage.getItem("tasks") || "[]");

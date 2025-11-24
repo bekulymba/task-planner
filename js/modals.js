@@ -1,8 +1,8 @@
-function openModal(id){
+export function openModal(id){
     document.getElementById(id).style.display = 'flex';
 }
 
-function closeModal(id){
+export function closeModal(id){
     document.getElementById(id).style.display = 'none';
 }
 

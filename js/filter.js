@@ -1,4 +1,4 @@
-function applyFiltersAndSort() {
+export function applyFiltersAndSort() {
     const filter = document.getElementById("filter").value;
     const sort = document.getElementById("sort").value;
 
