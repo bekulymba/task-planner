@@ -1,8 +1,3 @@
-// ---------------------------
-// FILTER + SORT LOGIC
-// ---------------------------
-
-// Главная функция, которую вызывает URL.js
 function applyFiltersAndSort() {
     const filter = document.getElementById("filter").value;
     const sort = document.getElementById("sort").value;
@@ -33,8 +28,8 @@ function applyFiltersAndSort() {
         const titleA = a.querySelector(".task-title").textContent.toLowerCase();
         const titleB = b.querySelector(".task-title").textContent.toLowerCase();
 
-        const dateA = new Date(a.querySelector(".task-data").textContent);
-        const dateB = new Date(b.querySelector(".task-data").textContent);
+        const dateA = parseInt(a.querySelector(".task-data").dataset.timestamp);
+        const dateB = parseInt(b.querySelector(".task-data").dataset.timestamp);
 
         switch (sort) {
 
@@ -61,7 +56,6 @@ function applyFiltersAndSort() {
         }
     });
 
-    // 🔹 3. ПЕРЕРИСОВКА DOM
     sortedTasks.forEach(t => list.appendChild(t));
 }
 

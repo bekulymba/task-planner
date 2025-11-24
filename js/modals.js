@@ -8,6 +8,10 @@ function closeModal(id){
 
 // new task modal
 document.querySelector('.new-task').addEventListener('click', () => {
+    // Очищаем поля перед открытием
+    document.getElementById('new-task-title').value = '';
+    document.getElementById('new-task-desc').value = '';
+    
     openModal('new-task-modal');
 });
 document.getElementById('new-task-cancel').addEventListener('click', () => {
