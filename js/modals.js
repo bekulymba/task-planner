@@ -1,70 +1,92 @@
-export function openModal(id){
-    document.getElementById(id).style.display = 'flex';
+export function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = 'flex';
+        const firstInput = modal.querySelector('input, textarea');
+        if (firstInput) {
+            setTimeout(() => firstInput.focus(), 100);
+        }
+    }
 }
 
-export function closeModal(id){
-    document.getElementById(id).style.display = 'none';
+export function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
-// new task modal
-document.querySelector('.new-task').addEventListener('click', () => {
-    // Очищаем поля перед открытием
-    document.getElementById('new-task-title').value = '';
-    document.getElementById('new-task-desc').value = '';
-    
-    openModal('new-task-modal');
-});
-document.getElementById('new-task-cancel').addEventListener('click', () => {
-    closeModal('new-task-modal');
-});
-
-
-// delete modal
-document.querySelectorAll('.delete-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        openModal('delete-modal');
+// Закрытие модальных окон при клике вне их содержимого
+function setupModalClickOutside() {
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
     });
-});
-document.getElementById('delete-cancel').addEventListener('click', () => {
-    closeModal('delete-modal');
-});
+}
 
-
-// edit modal
-document.querySelectorAll('.edit-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        openModal('edit-modal');
+// Закрытие модальных окон по клавише Escape
+function setupEscapeKey() {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const openModal = document.querySelector('.modal[style*="display: flex"]');
+            if (openModal) {
+                openModal.style.display = 'none';
+            }
+        }
     });
-});
-document.getElementById('edit-cancel').addEventListener('click', () => {
-    closeModal('edit-modal');
-});
+}
 
+// Инициализация обработчиков для новой задачи
+function initNewTaskModal() {
+    const newTaskBtn = document.querySelector('.new-task');
+    if (newTaskBtn) {
+        newTaskBtn.addEventListener('click', () => {
+            // Очищаем поля перед открытием
+            const titleInput = document.getElementById('new-task-title');
+            const descInput = document.getElementById('new-task-desc');
+            
+            if (titleInput) titleInput.value = '';
+            if (descInput) descInput.value = '';
+            
+            openModal('new-task-modal');
+        });
+    }
+}
 
-// complete modal
-document.querySelectorAll('.complete-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        openModal('complete-modal');
+// Инициализация всех обработчиков модальных окон
+function initModalHandlers() {
+    // Кнопки отмены
+    const cancelButtons = [
+        { id: 'new-task-cancel', modal: 'new-task-modal' },
+        { id: 'delete-cancel', modal: 'delete-modal' },
+        { id: 'edit-cancel', modal: 'edit-modal' },
+        { id: 'complete-cancel', modal: 'complete-modal' },
+        { id: 'fail-cancel', modal: 'fail-modal' }
+    ];
+
+    cancelButtons.forEach(({ id, modal }) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            // Удаляем старые обработчики, если они есть
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+            
+            newBtn.addEventListener('click', () => {
+                closeModal(modal);
+            });
+        }
     });
-});
-document.getElementById('complete-cancel').addEventListener('click', () => {
-    closeModal('complete-modal');
+}
+
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    setupModalClickOutside();
+    setupEscapeKey();
+    initNewTaskModal();
+    initModalHandlers();
 });
 
-
-// fail modal
-document.querySelectorAll('.fail-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        openModal('fail-modal');
-    });
-});
-document.getElementById('fail-cancel').addEventListener('click', () => {
-    closeModal('fail-modal');
-});
-
-// close modals when clicking outside
-document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('click', (e) => {
-        if(e.target === modal) modal.style.display = 'none';
-    });
-});
+export { initModalHandlers };
