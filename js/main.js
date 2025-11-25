@@ -151,10 +151,8 @@ document.getElementById("delete-confirm").onclick = () => {
     const selectedIds = getSelectedTaskIds();
 
     if (selectedIds.length > 0) {
-        // удалить ВСЕ выделенные
         tasks = tasks.filter(t => !selectedIds.includes(t.id));
     } else {
-        // удалить только одну
         tasks = tasks.filter(t => t.id != window.deletingTaskId);
     }
     saveTasks(tasks);
@@ -167,12 +165,10 @@ document.getElementById("complete-confirm").onclick = () => {
         const selectedIds = getSelectedTaskIds();
 
     if (selectedIds.length > 0) {
-        // COMPLETE для всех выделенных
         tasks.forEach(t => {
             if (selectedIds.includes(t.id)) t.status = "completed";
         });
     } else {
-        // COMPLETE для одного (старое поведение)
         const task = tasks.find(t => t.id == window.completingTaskId);
         if (task) task.status = "completed";
     };
@@ -188,12 +184,10 @@ document.getElementById("fail-confirm").onclick = () => {
     const selectedIds = getSelectedTaskIds();
 
     if (selectedIds.length > 0) {
-        // FAIL для всех выделенных
         tasks.forEach(t => {
             if (selectedIds.includes(t.id)) t.status = "failed";
         });
     } else {
-        // FAIL для одного (старое поведение)
         const task = tasks.find(t => t.id == window.failingTaskId);
         if (task) task.status = "failed";
     }
