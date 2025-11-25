@@ -1,5 +1,7 @@
 import { openModal,  closeModal } from "./modals.js";
 import { applyFiltersAndSort } from "./filter.js";
+import { initSelection, getSelectedTaskIds } from "./selection.js";
+
 
 // localstorage
 function loadTasks() {
@@ -29,6 +31,7 @@ function renderTasks() {
                 <span class="task-title">${task.title}</span>
 
                 <div class="task-window-buttons">
+                    <input type="checkbox" class="task-select-checkbox">
                     <button class="edit-btn">⋯</button>
                     <button class="delete-btn">✖</button>
                 </div>
@@ -50,6 +53,7 @@ function renderTasks() {
 
     attachTaskEvents();
     applyFiltersAndSort();
+    initSelection();
 }
 
 // event for tasks
@@ -95,7 +99,6 @@ function attachTaskEvents() {
 document.getElementById("new-task-save").onclick = () => {
     const title = document.getElementById("new-task-title").value.trim();
     const desc = document.getElementById("new-task-desc").value.trim();
-    console.log("CLICKED NEW TASK SAVE");
 
     if (!title) return alert("Title is required");
 
@@ -145,7 +148,15 @@ document.getElementById("edit-cancel").onclick = () => closeModal("edit-modal");
 
 // confirm delete
 document.getElementById("delete-confirm").onclick = () => {
-    tasks = tasks.filter(t => t.id != window.deletingTaskId);
+    const selectedIds = getSelectedTaskIds();
+
+    if (selectedIds.length > 0) {
+        // удалить ВСЕ выделенные
+        tasks = tasks.filter(t => !selectedIds.includes(t.id));
+    } else {
+        // удалить только одну
+        tasks = tasks.filter(t => t.id != window.deletingTaskId);
+    }
     saveTasks(tasks);
     closeModal("delete-modal");
     renderTasks();
@@ -153,8 +164,19 @@ document.getElementById("delete-confirm").onclick = () => {
 
 // confirm complete
 document.getElementById("complete-confirm").onclick = () => {
-    const task = tasks.find(t => t.id == window.completingTaskId);
-    task.status = "completed";
+        const selectedIds = getSelectedTaskIds();
+
+    if (selectedIds.length > 0) {
+        // COMPLETE для всех выделенных
+        tasks.forEach(t => {
+            if (selectedIds.includes(t.id)) t.status = "completed";
+        });
+    } else {
+        // COMPLETE для одного (старое поведение)
+        const task = tasks.find(t => t.id == window.completingTaskId);
+        if (task) task.status = "completed";
+    };
+
     saveTasks(tasks);
     closeModal("complete-modal");
     renderTasks();
@@ -163,8 +185,18 @@ document.getElementById("complete-confirm").onclick = () => {
 
 // confirm fail
 document.getElementById("fail-confirm").onclick = () => {
-    const task = tasks.find(t => t.id == window.failingTaskId);
-    task.status = "failed";
+    const selectedIds = getSelectedTaskIds();
+
+    if (selectedIds.length > 0) {
+        // FAIL для всех выделенных
+        tasks.forEach(t => {
+            if (selectedIds.includes(t.id)) t.status = "failed";
+        });
+    } else {
+        // FAIL для одного (старое поведение)
+        const task = tasks.find(t => t.id == window.failingTaskId);
+        if (task) task.status = "failed";
+    }
     saveTasks(tasks);
     closeModal("fail-modal");
     renderTasks();

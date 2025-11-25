@@ -118,6 +118,7 @@ body{
     border: 2px solid #000;
     border-right-color: #555;
     border-bottom-color: #555;
+    user-select: none;
 }
 .task-header{
     display:flex;
@@ -366,4 +367,60 @@ body{
 
 .task.failed .task-actions button.complete-btn {
     opacity: 0.5;
+}
+
+.task.selected {
+    outline: 2px solid #4A90E2;
+    background: rgba(74,144,226,0.1);
+}
+
+
+.task-select-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 24px;
+    height: 24px;
+
+    background: #222;
+    border: 2px solid;
+    border-top-color: #144;
+    border-left-color: #144;
+    border-right-color: #7fffd4;
+    border-bottom-color: #7fffd4;
+
+    cursor: pointer;
+    position: relative;
+    border-radius: 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.15s ease;
+}
+
+
+.task-select-checkbox:hover {
+    background: aquamarine;
+    border-top-color: #7fffd4;
+    border-left-color: #7fffd4;
+    border-right-color: #144;
+    border-bottom-color: #144;
+}
+
+
+.task-select-checkbox:checked {
+    background: aquamarine;
+}
+
+
+.task-select-checkbox:checked::after {
+    content: "";
+    width: 6px;
+    height: 12px;
+
+    border: solid #111;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
 }
